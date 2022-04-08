@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Questionaries</title>
+    <link rel=stylesheet type=text/css href="{{url_for('static',
+    filename='/app.css') }}">
+  </head>
+  <body>
+    <div class="contact-us">
+      <h1>Course Questionaries</h1>
+      <form action="#" method="post" id="form">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <!-- success messages -->
+         {% for message, category in messages %}
+          <h3 class="{{category}}">{{message }}</h3>
+          {% endfor %}
+      {% endif%}
+      {% endwith %}
+    </body>
+
+        <!-- error messages -->
+        {% for field, errors in form.errors.items() %}
+        <h3 class="failed">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </h3>
+        {% endfor %}
+
+        <!-- part one of the form -->
+        <div id="part-1" style="display: block">
+        
+          <div class="flex label">{{ form.username.label }}<em>&#x2a;</em></div> {{ form.username() }}
+  
+            <div class="flex label">
+                {{form.gic.label}}
+                <em>&#x2a;</em>
+            </div>
+           {{form.gic()}}
+
+
+         <div class="flex label">
+           {{form.email.label}}
+            <em>&#x2a;</em>
+         </div>
+         {{form.email()}}
+          <h3>Please fill out all the required fields.</h3>
+    
+          <button type="button" id="next">NEXT</button>
+        </div>
+
+        <!-- part to of the form -->
+
+        <d id="part-2" style="display: none">
+
+          <div class="flex label">
+              {{form.rateStudentAttendance.label}}
+              <em>&#x2a;</em>
+          </div>
+
+
+          <div class="flex-button">
+                {% for subfield in form.rateStudentAttendance %}
+                <div>
+                  <h3>{{ subfield.label }}</h3>  
+                  {{ subfield }}
+                </div>
+              {% endfor %}
+          </div>
+
+          <div class="flex label">
+                  {{form.studentAttendance.label}}
+              <em>&#x2a;</em>
+          </div>
+
+            {{form.studentAttendance()}}
+          
+          <div class="flex label">
+            {{form.studentGrade.label}}
+            <em>&#x2a;</em>
+          </div>
+          <div class="flex-button">
+                  {% for grade in form.studentGrade %}
+                <div>
+                  <h3>{{ grade.label }}</h3>  
+                  {{ grade }}
+                </div>
+              {% endfor %}
+          </div>
+          <div class="flex label">
+                {{form.studentCommentsPerformance.label}}
+                <em>&#x2a;</em>
+          </div>
+          
+            {{form.studentCommentsPerformance()}}
+          
+
+          <h3>Please fill out all the required fields.</h3>
+
+
+            <div class="flex label">
+              {{form.accept.label}}
+                <em>&#x2a;</em>
+            </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;By checking this you have agreed submit you detail</span
+            ></label>
+            <div class="flex-button">
+                  <div>
+              <h3>Check</h3>
+            {{form.accept()}}
+            </div>
+            </div>
+          
+          <div class="flex-button">
+            <button type="button" id="previous">PREVIOUS</button>
+            <button type="submit" class="submit" id="submit">SUBMIT</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script src="{{ url_for('static',filename='/src/index.js') }}"></script>
+</html>

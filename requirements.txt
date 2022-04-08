@@ -1,0 +1,7 @@
+# dependencies
+
+Flask>=2.1.1
+Flask-Scss>=0.5
+Jinja2>=3.1.1
+Werkzeug>=2.1.1
+WTForms>=3.0.1
